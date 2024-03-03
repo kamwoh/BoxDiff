@@ -1,19 +1,18 @@
-
 from typing import Any, Callable, Dict, List, Optional, Union, Tuple
 
 import numpy as np
 import torch
-from torch.nn import functional as F
-
-from diffusers.utils import deprecate, is_accelerate_available, logging, randn_tensor, replace_example_docstring
-from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
-
 from diffusers.pipelines.stable_diffusion import StableDiffusionPipeline
+from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
+from diffusers.utils import deprecate, is_accelerate_available, logging, replace_example_docstring
+from diffusers.utils.torch_utils import randn_tensor
+from torch.nn import functional as F
 
 from utils.gaussian_smoothing import GaussianSmoothing
 from utils.ptp_utils import AttentionStore, aggregate_attention
 
 logger = logging.get_logger(__name__)
+
 
 class BoxDiffPipeline(StableDiffusionPipeline):
     r"""
