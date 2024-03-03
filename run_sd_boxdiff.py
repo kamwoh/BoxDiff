@@ -1,19 +1,19 @@
 
 import pprint
+import warnings
 from typing import List
 
+import numpy as np
 import pyrallis
 import torch
 from PIL import Image
+
 from config import RunConfig
 from pipeline.sd_pipeline_boxdiff import BoxDiffPipeline
 from utils import ptp_utils, vis_utils
+from utils.drawer import draw_rectangle, DashedImageDraw
 from utils.ptp_utils import AttentionStore
 
-import numpy as np
-from utils.drawer import draw_rectangle, DashedImageDraw
-
-import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 
 
@@ -23,7 +23,8 @@ def load_model(config: RunConfig):
     if config.sd_2_1:
         stable_diffusion_version = "stabilityai/stable-diffusion-2-1-base"
     else:
-        stable_diffusion_version = "CompVis/stable-diffusion-v1-4"
+        # stable_diffusion_version = "CompVis/stable-diffusion-v1-4"
+        stable_diffusion_version = "runwayml/stable-diffusion-v1-5"
         # If you cannot access the huggingface on your server, you can use the local prepared one.
         # stable_diffusion_version = "../../packages/huggingface/hub/stable-diffusion-v1-4"
     stable = BoxDiffPipeline.from_pretrained(stable_diffusion_version).to(device)
